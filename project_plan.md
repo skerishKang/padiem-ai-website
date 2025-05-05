@@ -86,3 +86,16 @@ content/about/company.md에 회사소개 실데이터(회사 개요, 미션, 비
 - [완료] favicon.svg (SVG 버전 파비콘) 파일 추가 및 favicon.ico 변환 필요
 
 - [정책] 모든 브랜드 자산 SVG 파일은 static/brand-assets/logo 또는 static/brand-assets/favicon 경로에 저장 및 관리 
+
+### [파일 복구 및 구조 정리 로그]
+- `padiem-hugo-sample` 폴더 내용 유실 후 복구 작업 시작 (2025-05-06)
+- `c38a5cc` 커밋에서 `padiem-hugo-sample` 폴더 전체 체크아웃 시도 - 실패 (폴더 내용 불완전)
+- `c38a5cc` 커밋에서 특정 파일/폴더 (`hugo.toml`, `content`, `themes` 등) 개별 체크아웃 시도 - 실패 (폴더 내용 여전히 불완전)
+- `mkdir -p`를 사용한 필수 폴더 구조 일괄 생성 시도 - 터미널 환경 오류로 실패
+- 기존 `padiem-hugo-sample` 폴더 잔여물 `Remove-Item -Path padiem-hugo-sample -Recurse -Force` 명령으로 삭제 - 성공 (폴더 없음 확인)
+- 최종 지시(ver. 2)에 따라 필수 폴더 구조 개별 `mkdir` 명령으로 생성 - 대부분의 폴더가 이미 존재했으나, 오류 없이 개별 명령 실행 완료. `tree /F` 결과로 폴더 구조 정상 확인.
+- `hugo.toml` 파일이 저장소 루트에 존재함을 확인하고 내용 읽기 - 정상적인 Hugo 설정 파일 내용 확인.
+- `hugo server -D` 로컬 서버 실행 테스트 - `layouts/partials/footer.html` 파일의 잘못된 형식(단일 라인, 이스케이프 문자)으로 인한 파싱 오류 발생.
+- `layouts/partials/footer.html` 파일 내용을 올바른 다중 라인 HTML 형식으로 수정 - 편집 성공.
+- 수정된 `footer.html` 파일로 `hugo server -D` 로컬 서버 다시 실행 - 성공적으로 Hugo 빌드 및 서버 시작 확인. 설정 파일 및 기본 구조 인식 문제 해결.
+- 현재 상태: 필수 폴더 구조 및 `hugo.toml`, `layouts/partials/footer.html` 등 일부 핵심 파일 존재, 로컬 서버 실행 가능 상태. 테마의 나머지 파일 및 콘텐츠 파일 복구/생성 필요. 

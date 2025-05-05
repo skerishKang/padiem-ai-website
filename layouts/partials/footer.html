@@ -1,2 +1,26 @@
-<footer>\n    <div class=\"container\">\n        <div class=\"row\">\n            <div class=\"col-lg-8 col-md-10 mx-auto\">\n                <ul class=\"list-inline text-center\">\n                    {{ range .Site.Params.social }}\n                    {{ if .icon }}\n                    <li class=\"list-inline-item\">\n                        <a href=\"{{ .url }}\" target=\"_blank\" title=\"{{ .name }}\">\n                            <span class=\"fa-stack fa-lg\">\n                                <i class=\"fas fa-circle fa-stack-2x\"></i>\n                                <i class=\"fab fa-{{ .icon }} fa-stack-1x fa-inverse\"></i>\n                            </span>\n                        </a>\n                    </li>\n                    {{ end }}\n                    {{ end }}\
-                </ul>\n                <p class=\"copyright text-muted\">Copyright &copy; {{ .Site.Title }} {{ now.Year }}</p>\n                <p class=\"copyright text-muted\">\n                  <a href=\"{{ \"/about/\" | relURL }}\">기술 소개</a> &nbsp;&nbsp; <a href=\"{{ \"/solutions/\" | relURL }}\">솔루션</a> &nbsp;&nbsp; <a href=\"{{ \"/blog/\" | relURL }}\">기술 블로그</a>\n                </p>\n            </div>\n        </div>\n    </div>\n</footer> 
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <ul class="list-inline text-center">
+                    {{ range .Site.Params.social }}
+                    {{ if .icon }}
+                    <li class="list-inline-item">
+                        <a href="{{ .url }}" target="_blank" title="{{ .name }}">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-{{ .icon }} fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    {{ end }}
+                    {{ end }}
+                </ul>
+                <p class="copyright text-muted">Copyright &copy; {{ .Site.Title }} {{ now.Year }}</p>
+                <p class="copyright text-muted">
+                  <a href="{{ "/about/" | relURL }}">기술 소개</a> &nbsp;&nbsp; <a href="{{ "/solutions/" | relURL }}">솔루션</a> &nbsp;&nbsp; <a href="{{ "/blog/" | relURL }}">기술 블로그</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer> 

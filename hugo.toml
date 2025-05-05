@@ -5,5 +5,26 @@ theme = "cleanblog"
 
 [params]
   description = "Padiem AI Company Website"
+  sidebar_avatar = "/brand-assets/logo/padiem-icon-only.svg"
   [params.social]
     # Add social links here if needed 
+
+[[menu.main]]
+name = "기술"
+url = "/technology/"
+weight = 10
+
+[[menu.main]]
+name = "솔루션"
+url = "/solutions/"
+weight = 20
+
+[[menu.main]]
+name = "기술 블로그"
+url = "/blog/"
+weight = 30
+
+[[menu.main]]
+name = "About"
+url = "/about/"
+weight = 40 

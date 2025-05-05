@@ -1,0 +1,21 @@
+<div class="post-preview">
+    <a href="{{ .Permalink }}">
+        <h2 class="post-title">{{ .Title }}</h2>
+        {{ with .Params.subtitle }}
+            <h3 class="post-subtitle">{{ . }}</h3>
+        {{ end }}
+    </a>
+    <p class="post-meta">Posted by
+        {{ with .Params.author }}
+            {{ . }}
+        {{ end }}
+        on {{ .PublishDate.Format "January 2, 2006" }}
+    </p>
+    {{ .Summary | plainify | safeHTML }}
+    {{ if .Truncated }}
+    <div class="post-read-more">
+        <a href="{{ .Permalink }}">Read More &rarr;</a>
+    </div>
+    {{ end }}
+</div>
+<hr> 

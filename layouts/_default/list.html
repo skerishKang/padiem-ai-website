@@ -4,6 +4,7 @@
       <div class="col-lg-8 col-md-10 mx-auto">
         {{ .Content }}
         {{ range .Paginator.Pages }}
+          {{ .Title }} - DEBUG\n
           {{ .Render "summary" }}
         {{ end }}
         {{ partial "pagination.html" . }}
