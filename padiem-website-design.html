@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Padiem AI - 인공지능 기술 및 솔루션</title>
+    <style>
+        :root {
+            --primary-color: #10a37f;
+            --text-color: #353740;
+            --background-color: #ffffff;
+            --sidebar-bg: #f7f7f8;
+            --hover-color: #e5e5e6;
+            --border-color: #e5e5e6;
+            --header-height: 64px;
+            --sidebar-width: 260px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            color: var(--text-color);
+            background-color: var(--background-color);
+            line-height: 1.6;
+        }
+
+        /* 레이아웃 */
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* 사이드바 네비게이션 */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--sidebar-bg);
+            position: fixed;
+            height: 100vh;
+            left: 0;
+            top: 0;
+            overflow-y: auto;
+            z-index: 1000;
+            transition: transform 0.3s ease;
+            padding: 20px 0;
+            border-right: 1px solid var(--border-color);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            margin-bottom: 40px;
+        }
+
+        .logo img {
+            height: 32px;
+        }
+
+        .nav-items {
+            list-style: none;
+        }
+
+        .nav-item {
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin: 4px 0;
+            border-radius: 4px;
+        }
+
+        .nav-item:hover {
+            background-color: var(--hover-color);
+        }
+
+        .nav-item.active {
+            background-color: var(--hover-color);
+            font-weight: 500;
+        }
+
+        /* 서브메뉴 */
+        .submenu {
+            list-style: none;
+            margin-left: 20px;
+            display: none;
+        }
+
+        .submenu.active {
+            display: block;
+        }
+
+        .submenu-item {
+            padding: 8px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 14px;
+            margin: 4px 0;
+            border-radius: 4px;
+        }
+
+        .submenu-item:hover {
+            background-color: var(--hover-color);
+        }
+
+        /* 메인 콘텐츠 */
+        .main-content {
+            flex-grow: 1;
+            margin-left: var(--sidebar-width);
+            padding: 80px 40px 40px;
+            min-height: 100vh;
+        }
+
+        /* 헤더 */
+        .header {
+            position: fixed;
+            width: calc(100% - var(--sidebar-width));
+            height: var(--header-height);
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 0 40px;
+            z-index: 900;
+            top: 0;
+            right: 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .contact-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .contact-btn:hover {
+            background-color: #0c8d6e;
+        }
+
+        /* 햄버거 메뉴 (모바일) */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        /* 히어로 섹션 */
+        .hero {
+            margin-bottom: 60px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+
+        .hero-cta {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .hero-cta:hover {
+            background-color: #0c8d6e;
+        }
+
+        /* 섹션 */
+        .section {
+            margin-bottom: 80px;
+        }
+
+        .section h2 {
+            font-size: 36px;
+            margin-bottom: 24px;
+        }
+
+        .section p {
+            margin-bottom: 16px;
+            max-width: 800px;
+        }
+
+        /* 기술 카드 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background-color: var(--background-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 24px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .card h3 {
+            font-size: 20px;
+            margin-bottom: 16px;
+        }
+
+        .card p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        /* 블로그 섹션 */
+        .blog-container {
+            display: flex;
+            gap: 40px;
+        }
+
+        .blog-main {
+            flex-grow: 1;
+        }
+
+        .blog-sidebar {
+            width: 240px;
+            flex-shrink: 0;
+        }
+
+        .blog-sidebar h3 {
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+
+        .category-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .category-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .category-list li:last-child {
+            border-bottom: none;
+        }
+
+        .category-list a {
+            text-decoration: none;
+            color: var(--text-color);
+            transition: color 0.3s;
+        }
+
+        .category-list a:hover {
+            color: var(--primary-color);
+        }
+
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            background-color: var(--hover-color);
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 14px;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .tag:hover {
+            background-color: #dcdcdc;
+        }
+
+        .blog-post {
+            margin-bottom: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .blog-post:last-child {
+            border-bottom: none;
+        }
+
+        .blog-post h2 {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .blog-post-meta {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .read-more {
+            display: inline-block;
+            margin-top: 16px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .read-more:hover {
+            text-decoration: underline;
+        }
+
+        /* 미디어 쿼리 */
+        @media (max-width: 992px) {
+            .header {
+                width: 100%;
+                padding: 0 20px;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 80px 20px 40px;
+            }
+
+            /* 블로그 레이아웃 조정 */
+            .blog-container {
+                flex-direction: column;
+            }
+
+            .blog-sidebar {
+                width: 100%;
+                order: 2;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 사이드바 네비게이션 -->
+        <nav class="sidebar">
+            <div class="logo">
+                <img src="/api/placeholder/180/40" alt="Padiem AI 로고">
+            </div>
+            <ul class="nav-items">
+                <li class="nav-item">기술</li>
+                <li class="nav-item">솔루션</li>
+                <li class="nav-item">활용 사례</li>
+                <li class="nav-item active">Blog</li>
+                <li class="nav-item">교육</li>
+                <li class="nav-item" id="about-menu">About Padiem AI</li>
+                <ul class="submenu" id="about-submenu">
+                    <li class="submenu-item">기업 개요</li>
+                    <li class="submenu-item">연혁</li>
+                    <li class="submenu-item">팀 소개</li>
+                </ul>
+            </ul>
+        </nav>
+
+        <!-- 헤더 -->
+        <header class="header">
+            <button class="menu-toggle">☰</button>
+            <button class="contact-btn">문의하기</button>
+        </header>
+
+        <!-- 메인 콘텐츠 - 블로그 페이지 예시 -->
+        <main class="main-content">
+            <section class="hero">
+                <h1>Padiem AI 기술 블로그</h1>
+                <p>최신 AI 기술 동향, 연구 결과 및 활용 사례를 공유합니다.</p>
+            </section>
+
+            <div class="blog-container">
+                <div class="blog-main">
+                    <!-- 블로그 게시물 예시 -->
+                    <article class="blog-post">
+                        <h2>대규모 언어 모델의 최신 발전 동향</h2>
+                        <div class="blog-post-meta">2025년 5월 3일 | 작성자: 김연구 | AI 연구</div>
+                        <p>최근 대규모 언어 모델(LLM)의 발전은 자연어 처리 분야에 혁명적인 변화를 가져왔습니다. 특히 Padiem AI의 연구팀은 컨텍스트 이해와 추론 능력을 향상시키는 새로운 아키텍처를 개발했습니다. 이 기술은 기존 모델 대비 30% 향상된 성능을 보이며, 특히 복잡한 문제 해결 능력에서 두각을 나타냅니다.</p>
+                        <a href="#" class="read-more">더 읽기 →</a>
+                    </article>
+
+                    <article class="blog-post">
+                        <h2>생성형 AI의 산업별 활용 전략</h2>
+                        <div class="blog-post-meta">2025년 4월 28일 | 작성자: 이솔루션 | 산업 적용</div>
+                        <p>생성형 AI 기술이 다양한 산업 분야에서 어떻게 혁신을 이끌고 있는지 살펴봅니다. 금융, 의료, 제조 등 주요 산업에서 Padiem AI의 솔루션이 적용된 사례를 분석하고, 각 산업별 맞춤형 AI 도입 전략을 제시합니다.</p>
+                        <a href="#" class="read-more">더 읽기 →</a>
+                    </article>
+
+                    <article class="blog-post">
+                        <h2>AI 윤리와 책임 있는 개발 원칙</h2>
+                        <div class="blog-post-meta">2025년 4월 15일 | 작성자: 박윤리 | AI 윤리</div>
+                        <p>인공지능 기술의 발전과 함께 윤리적 고려사항의 중요성이 커지고 있습니다. Padiem AI가 추구하는 책임 있는 AI 개발 원칙과 윤리적 가이드라인을 소개하며, 지속 가능한 AI 생태계를 위한 산업 내 협력 방안을 논의합니다.</p>
+                        <a href="#" class="read-more">더 읽기 →</a>
+                    </article>
+                </div>
+
+                <!-- 블로그 사이드바 -->
+                <aside class="blog-sidebar">
+                    <div>
+                        <h3>카테고리</h3>
+                        <ul class="category-list">
+                            <li><a href="#">AI 연구 (15)</a></li>
+                            <li><a href="#">기술 동향 (23)</a></li>
+                            <li><a href="#">산업 적용 (19)</a></li>
+                            <li><a href="#">AI 윤리 (8)</a></li>
+                            <li><a href="#">교육 자료 (12)</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>태그</h3>
+                        <div class="tag-cloud">
+                            <a href="#" class="tag">LLM</a>
+                            <a href="#" class="tag">생성형AI</a>
+                            <a href="#" class="tag">딥러닝</a>
+                            <a href="#" class="tag">MLOps</a>
+                            <a href="#" class="tag">컴퓨터비전</a>
+                            <a href="#" class="tag">NLP</a>
+                            <a href="#" class="tag">데이터</a>
+                            <a href="#" class="tag">윤리</a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // 모바일 메뉴 토글
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.toggle('active');
+        });
+
+        // About 서브메뉴 토글
+        document.getElementById('about-menu').addEventListener('click', function() {
+            document.getElementById('about-submenu').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
