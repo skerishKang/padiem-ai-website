@@ -1,0 +1,9 @@
+baseURL = "https://padiem-ai-website.netlify.app/"
+languageCode = "ko-kr"
+title = "Padiem AI Website"
+theme = "cleanblog"
+
+[params]
+  description = "Padiem AI Company Website"
+  [params.social]
+    # Add social links here if needed 

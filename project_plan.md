@@ -78,7 +78,7 @@
 - 배포 및 운영 가이드 문서화
 
 ## 2024-07-09
-content/about/company.md에 회사소개 실데이터(회사 개요, 미션, 비전, 연혁 등) 1차 추가 완료
+content/about/company.md에 회사소개 실데이터(회사 개요, 미션, 비전, 연혁 등) 1차 추가 완료 
 
 - [완료] padiem-logo-white.svg (화이트 로고) 파일 추가
 - [완료] padiem-logo-black.svg (블랙 로고) 파일 추가
